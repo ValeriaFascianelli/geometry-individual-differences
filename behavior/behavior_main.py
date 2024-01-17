@@ -73,7 +73,7 @@ if __name__ == '__main__':
     ### import behavioral data to reproduce Figure 5 and Suppl. Figure 2
     
     # Specify the file path of your .pkl file
-    file_path_behavior = 'C:/Users/valer/Documents/MEGA/Data_Analysis_Functions_Columbia/abstraction_analysis/submission_NatComms_2023/data+scripts/behavior/'
+    file_path_behavior = 'path_to_behavior_data/behavior/' %%%<<--- CHANGE IT ACCORDING TO YOUR PATH
     
     ###################### MONKEY 1 (=SA)   
     file_path = file_path_behavior+'RT_cond_SA.pkl'
