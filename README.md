@@ -1,4 +1,5 @@
 This repository contains 4 main directories with python scripts and datasets. Each of them aims to reproduce the main behavioral and neural analyses from real and artificial datasets.  
+For RNNs training code please [refer to this github repository](https://github.com/AldoBattista/RNN-NeuralGeometry-BehavioralDiffs.git)
 
 1. "behavior" directory: it contains the 'behavior_main.py' and the behavioral data from 2 subjects. To reproduce the main behavioral figures, run the main script. It will upload the behavioral data and run all the main analyses (Figure 6).
 
