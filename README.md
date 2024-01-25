@@ -1,1 +1,4 @@
-This directory contains the 'behavior_main.py' and the behavioral data from 2 subjects. To reproduce the main behavioral figures, run the main script. It will uplodad the behavioral data and run all the main analyses.
+1. "behavior" directory:
+
+  This directory contains the 'behavior_main.py' and the behavioral data from 2 subjects. To reproduce the main behavioral figures, run the main script. It will   
+  upload the behavioral data and run all the main analyses.
