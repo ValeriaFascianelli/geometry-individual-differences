@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 
-@author: Valeria Fascianelli--October2023
+@author: Valeria Fascianelli
 """
 
 
@@ -14,7 +14,7 @@ import scipy.special
 import statsmodels.api as sm 
 
 
-def get_multi_linear(correct_trials,error_trials,rt,conditions):
+def get_multi_linear(correct_trials,rt,conditions):
     
     number_correct_trials = []
     id_correct_trials     = []
@@ -28,11 +28,10 @@ def get_multi_linear(correct_trials,error_trials,rt,conditions):
     
     tot_resamples = 100
     resemple = 0
-    score = []
-    weights = []
-    min_number = np.min(number_correct_trials)#np.min(number_error_trials)
-    correct_trials_balanced = np.nan*np.ones(( min_number*len(conditions),np.size(error_trials,axis=1)))
-    #error_trials_balanced   = np.nan*np.ones(( min_number*len(conditions),np.size(error_trials,axis=1)))
+    score    = []
+    weights  = []
+    min_number = np.min(number_correct_trials)
+    correct_trials_balanced = np.nan*np.ones(( min_number*len(conditions),np.size(correct_trials,axis=1)))
     rt_analysis   = np.nan*np.ones(( min_number*len(conditions) ))
 
     while resemple<tot_resamples:
@@ -40,19 +39,17 @@ def get_multi_linear(correct_trials,error_trials,rt,conditions):
         for iCond, jCond in enumerate(conditions):
            
             random_sample_corr = random.sample(list(id_correct_trials[iCond]), min_number)
-            #random_sample_err  = random.sample(list(id_error_trials[iCond]),   min_number)
+            
             if iCond == 0:
                 correct_trials_balanced[:min_number,:] = correct_trials[random_sample_corr,:] 
-                #error_trials_balanced[:min_number,:]   = error_trials[random_sample_err,:] 
                 rt_analysis[:min_number] = rt[random_sample_corr]
                 continue
             correct_trials_balanced[iCond*min_number:(iCond+1)*min_number,:] =  correct_trials[random_sample_corr,:] 
-            #error_trials_balanced[iCond*min_number:(iCond+1)*min_number,:]   =  error_trials[random_sample_err,:] 
             rt_analysis[iCond*min_number:(iCond+1)*min_number] = rt[random_sample_corr]      
                           
         correct_sample = correct_trials_balanced[:,0:3]        
-        data = correct_sample #np.concatenate((right_sample, left_sample))        
-        rt_label = rt_analysis #np.concatenate((rt_right , rt_left ))       
+        data = correct_sample      
+        rt_label = rt_analysis      
         ## Multi Linear Regression
         poly = PolynomialFeatures(interaction_only=True)
         data_int = poly.fit_transform(data)
@@ -73,7 +70,7 @@ if __name__ == '__main__':
     ### import behavioral data to reproduce Figure 5 and Suppl. Figure 2
     
     # Specify the file path of your .pkl file
-    file_path_behavior = 'path_to_behavior_data/behavior/' %%%<<--- CHANGE IT ACCORDING TO YOUR PATH
+    file_path_behavior = '/behavior/'
     
     ###################### MONKEY 1 (=SA)   
     file_path = file_path_behavior+'RT_cond_SA.pkl'
@@ -94,13 +91,13 @@ if __name__ == '__main__':
     
     ## multi-linear regression
     correct_trials_SA  = np.load(file_path_behavior+'correct_trials_SA.npy')
-    error_trials_SA    = np.load(file_path_behavior+'error_trials_SA.npy')
+  
     # Open the file in binary read mode and load the data into a variable
     file_path = file_path_behavior+'task_conditions_SA.pkl'
     with open(file_path, 'rb') as file:    
         task_conditions_SA = pickle.load(file)
     
-    weights_SA = get_multi_linear(correct_trials_SA, error_trials_SA, rt_SA, task_conditions_SA)
+    weights_SA = get_multi_linear(correct_trials_SA,  rt_SA, task_conditions_SA)
     #1: intercept, 2: previous, 3: rule, 4: shape, 5: previous&rule, 6: previious&shape, 7:rule&shape
     ### normalize weights
     sum_prova = np.sum(weights_SA[:,1:],axis=1)
@@ -127,13 +124,13 @@ if __name__ == '__main__':
     
     ## multi-linear regression
     correct_trials_SH  = np.load(file_path_behavior+'correct_trials_SH.npy')
-    error_trials_SH   = np.load(file_path_behavior+'error_trials_SH.npy')
+ 
     # Open the file in binary read mode and load the data into a variable
     file_path = file_path_behavior+'task_conditions_SH.pkl'
     with open(file_path, 'rb') as file:    
         task_conditions_SH = pickle.load(file)
     
-    weights_SH = get_multi_linear(correct_trials_SH, error_trials_SH, rt_SH, task_conditions_SH)
+    weights_SH = get_multi_linear(correct_trials_SH, rt_SH, task_conditions_SH)
     #1: intercept, 2: previous, 3: rule, 4: shape, 5: previous&rule, 6: previious&shape, 7:rule&shape
     ### normalize weights
     sum_prova = np.sum(weights_SH[:,1:],axis=1)
