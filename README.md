@@ -1,3 +1,6 @@
+## NeuralGeometry-BehavioralDiffs
+
+
 This repository contains 4 main directories with python scripts and datasets. Each of them aims to reproduce the main behavioral and neural analyses from real and artificial datasets.  
 For RNNs training code please [refer to this github repository](https://github.com/AldoBattista/RNN-NeuralGeometry-BehavioralDiffs.git)
 
