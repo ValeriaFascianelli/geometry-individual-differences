@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Apr 10 14:34:18 2023
-
-@author: valer
+@author: Valeria Fascianelli, 2023
 """
 
 import pickle
