@@ -27,14 +27,14 @@ def get_multi_linear(correct_trials,rt,conditions):
         id_correct_trials.append(np.where(id_tr)[0])
     
     tot_resamples = 100
-    resemple = 0
+    resample = 0
     score    = []
     weights  = []
     min_number = np.min(number_correct_trials)
     correct_trials_balanced = np.nan*np.ones(( min_number*len(conditions),np.size(correct_trials,axis=1)))
     rt_analysis   = np.nan*np.ones(( min_number*len(conditions) ))
 
-    while resemple<tot_resamples:
+    while resample<tot_resamples:
 
         for iCond, jCond in enumerate(conditions):
            
@@ -58,7 +58,7 @@ def get_multi_linear(correct_trials,rt,conditions):
         res.summary()
         weights.append(np.abs(res.params)/np.sum(np.abs(res.params))) 
         score.append(res.rsquared)
-        resemple+=1    
+        resample+=1    
        
     weights = np.squeeze(np.array(weights))
     
@@ -137,11 +137,6 @@ if __name__ == '__main__':
     sum_prova_tile=np.transpose(np.tile(sum_prova,[6,1]))
     weights_SH_norm=weights_SH[:,1:]/sum_prova_tile   
     
-    # ## statistical test
-    # cond_comparison=0   
-    # _,p = scipy.stats.mannwhitneyu(weights_SA_norm[:,cond_comparison],weights_SH_norm[:,cond_comparison])
-    # print(p)
-        
     ##################################### plot section
     
     
