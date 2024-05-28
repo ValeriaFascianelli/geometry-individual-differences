@@ -149,16 +149,16 @@ if __name__ == "__main__":
     
     ### NET 2 
 
-    file_path = 'C:/Users/valer/Documents/MEGA/Data_Analysis_Functions_Columbia/abstraction_analysis/submission_NatComms_2023/data+scripts/behavior_RNN/comp_net2.pkl'
+    file_path = '/behavior_RNN/comp_net2.pkl'
     with open(file_path, 'rb') as file:
         comp = pickle.load(file)
     
     
-    file_path = 'C:/Users/valer/Documents/MEGA/Data_Analysis_Functions_Columbia/abstraction_analysis/submission_NatComms_2023/data+scripts/behavior_RNN/trials_id_net2.pkl'
+    file_path = '/behavior_RNN/trials_id_net2.pkl'
     with open(file_path, 'rb') as file:
         trials_id = pickle.load(file)
         
-    file_path = 'C:/Users/valer/Documents/MEGA/Data_Analysis_Functions_Columbia/abstraction_analysis/submission_NatComms_2023/data+scripts/behavior_RNN/rt_cond_net2.pkl'
+    file_path = '/behavior_RNN/rt_cond_net2.pkl'
     with open(file_path, 'rb') as file:
         rt_cond = pickle.load(file)    
        
@@ -187,8 +187,4 @@ if __name__ == "__main__":
     plt.suptitle('RNN: Normalized Weights of multi-linear regression', fontsize=20)
     
     
-    # ## statistical test
-    import scipy
-    cond_comparison=2   
-    _,p = scipy.stats.mannwhitneyu(weights_norm_net1[:,cond_comparison],weights_norm_net2[:,cond_comparison])
-    print(p)
+ 
