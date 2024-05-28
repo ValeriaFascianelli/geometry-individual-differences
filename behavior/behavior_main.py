@@ -67,7 +67,7 @@ def get_multi_linear(correct_trials,rt,conditions):
 
 if __name__ == '__main__':
 
-    ### import behavioral data to reproduce Figure 5 and Suppl. Figure 2
+    ### import behavioral data to reproduce Figure 6 and Suppl. Figure 2
     
     # Specify the file path of your .pkl file
     file_path_behavior = '/behavior/'
@@ -172,7 +172,7 @@ if __name__ == '__main__':
     ax[1,1].set_title('Fig 5 MONKEY 2: Reaction time')
     
     
-    ## multi-linear analysis
+    ## multi-linear regression analysis
     
     _,ax=plt.subplots(2,2, figsize=(15,10))
     ax[0,1].errorbar(x=range(6), y=np.mean(weights_SA_norm,axis=0)*100,yerr=2*np.std(weights_SA_norm,axis=0)*100, capsize=8, color='k', ls='none', marker='o',markersize=10)
