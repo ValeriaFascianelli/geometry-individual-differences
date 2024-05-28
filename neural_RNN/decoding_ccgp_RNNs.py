@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue May  9 20:02:46 2023
-
-@author: valer
+@author: Valeria Fascianelli, 2023
 """
 import matplotlib
 import matplotlib.pyplot as plt
