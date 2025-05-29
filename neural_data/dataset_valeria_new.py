@@ -34,7 +34,7 @@ class Dataset():
         
     def get_tottrial(self, session_id, neuron_id):
         tot_neurons = self.get_totneuron_persession()
-        if tot_neurons[session_id] == 1: # perche se ho solo una cellula nella sessione, python importa in modo sbagliato i trials
+        if tot_neurons[session_id] == 1: 
             tot_trial = np.size(eval("self.matlabstruct['trials'].number[session_id]"))
         else:
             tot_trial = np.size(eval("self.matlabstruct['trials'].number[session_id][neuron_id]"))
@@ -69,7 +69,7 @@ class Dataset():
         trial_align = []        
         id_trial_align = []
         
-        if np.size(id_trials) == 1: # perche se ho solo un trial per quella cellula salto           
+        if np.size(id_trials) == 1: 
             #id_trials = self.matlabstruct['trials'].number[session_id] 
             return trial_align, id_trial_align
         
