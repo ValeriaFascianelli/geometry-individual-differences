@@ -74,10 +74,7 @@ class Dataset():
             #id_trials = self.matlabstruct['trials'].number[session_id] 
             return trial_align, id_trial_align
         
-#        if np.size(id_trials) == 1: # perche se ho solo un trial per quella cellula salto           
-#            id_trials = self.matlabstruct['trials'].number[session_id] 
-#      
-        ## commentato Febbraio 2020---discommentato Luglio 2020 per problema in PFo sessione 40 neuron 2
+
         if np.size(id_trials) == 0:
             print('Not trials for neuron {} in session {}'.format(neuron_id, session_id))
             return trial_align, id_trials
@@ -93,7 +90,6 @@ class Dataset():
         p = []
       
         if neuron_per_session[session_id] == 1 or np.size(eval('self.matlabstruct[\'trials\'].time[session_id][neuron_id]'))==1:
-         # stesso problema di cui sopra, se hai solo un tempo di spike in un trial python importa male tutti i valori successivi
              p = self.matlabstruct['trials'].time[session_id]
         else:
             for s in eval('self.matlabstruct[\'trials\'].time[session_id][neuron_id]'):    
@@ -188,9 +184,9 @@ class Decoder():
             for k_pattern in range(len(trial_pos[k_neuro])):
                 #print("pattern {}".format(k_pattern))
                 n_trials = len(trial_pos[k_neuro][k_pattern])
-                k_trials = int(np.floor(n_trials*0.8)) # 80% of trials used for training   
-                train_trials = random.sample(range(0, n_trials), k_trials) #random.sample(trial_pos[k_neuro][k_pattern], k_trials) #random.sample(range(0, n_trials), k_trials)
-                test_trials = range(0, n_trials)  #trial_pos[k_neuro][k_pattern]#range(0, n_trials)
+                k_trials = int(np.floor(n_trials*0.8)) 
+                train_trials = random.sample(range(0, n_trials), k_trials) 
+                test_trials = range(0, n_trials)  
                 for i_train in range(len(train_trials)):
                     test_trials = [x for x in test_trials if x != train_trials[i_train]]    
                 if len(list(set(train_trials) & set(test_trials))) > 0:
@@ -265,7 +261,7 @@ class Decoder():
             #print('pattern {}:'.format(n_pattern))
             for n_neuro in range(n_neurons):                    
                # print('neuron {}:'.format(n_neuro))
-                train_trials = trials_train_pos[n_neuro][n_pattern] # li scelgo solo dai train trials                   
+                train_trials = trials_train_pos[n_neuro][n_pattern] 
                 test_trials = trials_test_pos[n_neuro][n_pattern]   
                 
                 position_train = np.random.choice(train_trials, self.n_loops) #random.sample(train_trials,1)
